@@ -14,5 +14,5 @@ Package.onUse(function(api) {
   api.addFiles('servant_login_button.css', 'client');
 
   api.addFiles('servant.js');
-  api.export('ServantAPI');
+  api.export('ServantAPI', 'server');
 });

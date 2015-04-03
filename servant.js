@@ -17,6 +17,14 @@ if (Meteor.isClient) {
     // thus not sure if we should be sending access tokens; but we do it
     // for all other oauth2 providers, and it may come in handy.
     forLoggedInUser: ['services.servant'],
-    forOtherUsers: ['']
+    forOtherUsers: ['services.servant']
   });
+}
+
+if (Meteor.isServer && !Package.autopublish){
+  Meteor.publish(null, function(){
+    if (this.userId){
+      return Meteor.users.find({_id: this.userId}, {fields: {'services.servant': 1}});
+    }
+  })
 }
